@@ -98,14 +98,6 @@ elif app_mode == '02 Visualization':
 
   tab1.subheader("Cinematic Success Patterns: A Visual Exploration of Performance Metrics ")
   if len(symbols) == 2:
-    # Line Chart
-    fig, ax = plt.subplots(figsize=(width1, width1))
-    ax.plot(df[symbols[0]], df[symbols[1]], marker='o', linestyle='-')
-    ax.set_xlabel(symbols[0])
-    ax.set_ylabel(symbols[1])
-    ax.set_title(f"Line Chart of {symbols[1]} vs {symbols[0]}")
-    tab1.pyplot(fig)
-    
     # Bar Chart
     fig, ax = plt.subplots(figsize=(width1, width1))
     sns.barplot(x=df[symbols[0]], y=df[symbols[1]])
