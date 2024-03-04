@@ -92,7 +92,7 @@ elif app_mode == '02 Visualization':
   list_variables = df.columns
 
   st.title("Visualization")
-  symbols = st.multiselect("Select two variables",list_variables,default=['opening_weekend','worldwide_gross'])
+  symbols = st.multiselect("Select two variables",list_variables,default=['domestic_gross','worldwide_gross'])
   width1 = st.sidebar.slider("plot width", 1, 25, 10)
   tab1, tab2, tab3 = st.tabs(["Line Chart & Bar Chart ","📈 Correlation","Box Plot Genre Analysis"])
 
