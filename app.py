@@ -100,17 +100,19 @@ elif app_mode == '02 Visualization':
   st.line_chart(data=df, x=symbols[0],y=symbols[1], width=0, height=0, use_container_width=True)
   st.write(" ")
   st.bar_chart(data=df, x=symbols[0], y=symbols[1], use_container_width=True)
-
+  
+  numerical_df = df.select_dtypes(include=[np.number])
   tab2.subheader("Correlation Matrix: the Relationships Among Movie Success Variables")
   fig,ax = plt.subplots(figsize=(width1, width1))
-  sns.heatmap(df.corr(),cmap= sns.cubehelix_palette(8),annot = True, ax=ax)
+  sns.heatmap(numerical_df.corr(), cmap=sns.cubehelix_palette(8), annot=True, ax=ax)
   tab2.write(fig)
 
   st.write(" ")
   st.write(" ")
   st.markdown("### Pairplot")
 
-  df2 = df[[list_variables[0],list_variables[1],list_variables[2],list_variables[3],list_variables[4]]]
+  filtered_list_variables = [var for var in list_variables if var in numerical_df.columns]
+  df2 = numerical_df[filtered_list_variables]
   fig3 = sns.pairplot(df2)
   st.pyplot(fig3)
 
