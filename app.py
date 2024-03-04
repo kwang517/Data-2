@@ -113,7 +113,7 @@ elif app_mode == '02 Visualization':
 
   # Creating a box plot for worldwide gross across different genres
   plt.figure(figsize=(14, 8))
-  sns.boxplot(x='genre', y='worldwide_gross', data=filtered_movies_df)
+  sns.boxplot(x='genre', y='worldwide_gross', data=filtered_movies_df,palette='viridis')
   plt.title('Worldwide Gross Performance by Movie Genre')
   plt.xticks(rotation=45)  # Rotate genre labels for better readability
   plt.xlabel('Genre')
