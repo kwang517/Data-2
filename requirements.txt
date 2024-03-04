@@ -1,7 +1,7 @@
 pandas
 streamlit
 numpy
-pillow
+PIL
 matplotlib
 seaborn
 sklearn
