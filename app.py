@@ -94,8 +94,7 @@ elif app_mode == '02 Visualization':
   st.title("Visualization")
   symbols = st.multiselect("Select two variables",list_variables,default=['opening_weekend','worldwide_gross'])
   width1 = st.sidebar.slider("plot width", 1, 25, 10)
-  #symbols = st.multiselect("", list_variables, list_variables[:5])
-  tab1, tab2= st.tabs(["Line Chart & Bar Chart ","📈 Correlation"])
+  tab1, tab2, tab3 = st.tabs(["Line Chart & Bar Chart ","📈 Correlation","Box Plot Genre Analysis"])
 
   tab1.subheader("Cinematic Success Patterns: A Visual Exploration of Performance Metrics ")
   st.line_chart(data=df, x=symbols[0],y=symbols[1], width=0, height=0, use_container_width=True)
@@ -106,16 +105,22 @@ elif app_mode == '02 Visualization':
   tab2.subheader("Correlation Matrix: the Relationships Among Movie Success Variables")
   fig,ax = plt.subplots(figsize=(width1, width1))
   sns.heatmap(numerical_df.corr(), cmap=sns.cubehelix_palette(8), annot=True, ax=ax)
-  tab2.write(fig)
+  tab2.pyplot(fig)
 
-  st.write(" ")
-  st.write(" ")
-  st.markdown("### Pairplot")
+  tab3.subheader("Worldwide Gross in relation to movie genres")
+  # Filter out movies with missing or undefined genres
+  filtered_movies_df = movies_df.dropna(subset=['genre'])
 
-  filtered_list_variables = [var for var in list_variables if var in numerical_df.columns]
-  df2 = numerical_df[filtered_list_variables]
-  fig3 = sns.pairplot(df2)
-  st.pyplot(fig3)
+  # Creating a box plot for worldwide gross across different genres
+  plt.figure(figsize=(14, 8))
+  sns.boxplot(x='genre', y='worldwide_gross', data=filtered_movies_df)
+  plt.title('Worldwide Gross Performance by Movie Genre')
+  plt.xticks(rotation=45)  # Rotate genre labels for better readability
+  plt.xlabel('Genre')
+  plt.ylabel('Worldwide Gross ($)')
+  # Show plot
+  tab3.pyplot(plt)
+
 
 
 elif app_mode == '03 Prediction':
