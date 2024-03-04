@@ -97,9 +97,24 @@ elif app_mode == '02 Visualization':
   tab1, tab2, tab3 = st.tabs(["Line Chart & Bar Chart ","📈 Correlation","Box Plot Genre Analysis"])
 
   tab1.subheader("Cinematic Success Patterns: A Visual Exploration of Performance Metrics ")
-  st.line_chart(data=df, x=symbols[0],y=symbols[1], width=0, height=0, use_container_width=True)
-  st.write(" ")
-  st.bar_chart(data=df, x=symbols[0], y=symbols[1], use_container_width=True)
+  if len(symbols) == 2:
+    # Line Chart
+    fig, ax = plt.subplots(figsize=(width1, width1))
+    ax.plot(df[symbols[0]], df[symbols[1]], marker='o', linestyle='-')
+    ax.set_xlabel(symbols[0])
+    ax.set_ylabel(symbols[1])
+    ax.set_title(f"Line Chart of {symbols[1]} vs {symbols[0]}")
+    tab1.pyplot(fig)
+    
+    # Bar Chart
+    fig, ax = plt.subplots(figsize=(width1, width1))
+    sns.barplot(x=df[symbols[0]], y=df[symbols[1]])
+    ax.set_xlabel(symbols[0])
+    ax.set_ylabel(symbols[1])
+    ax.set_title(f"Bar Chart of {symbols[1]} vs {symbols[0]}")
+    tab1.pyplot(fig)
+  else:
+    tab1.write("Please select exactly two variables for the visualization.")
   
   numerical_df = df.select_dtypes(include=[np.number])
   tab2.subheader("Correlation Matrix: the Relationships Among Movie Success Variables")
