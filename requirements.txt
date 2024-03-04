@@ -1,8 +1,8 @@
 pandas
 streamlit
 numpy
-PIL
+pillow
 matplotlib
 seaborn
-sklearn
+scikit-learn
 time
