@@ -109,7 +109,7 @@ elif app_mode == '02 Visualization':
 
   tab3.subheader("Worldwide Gross in relation to movie genres")
   # Filter out movies with missing or undefined genres
-  filtered_movies_df = movies_df.dropna(subset=['genre'])
+  filtered_movies_df = df.dropna(subset=['genre'])
 
   # Creating a box plot for worldwide gross across different genres
   plt.figure(figsize=(14, 8))
